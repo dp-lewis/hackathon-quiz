@@ -13,7 +13,7 @@
 
 <script type="text/html" id="template-question">
 	<form>
-		<legend><%= question %></legend>
+		<legend class="question__question"><%= question %></legend>
 
 		<div class="answers">
 			<ol>
@@ -60,9 +60,12 @@
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="bower_components/backbone/backbone.js"></script>
+<script src="bower_components/blast-text/jquery.blast.js"></script>
 <script src="js/models/question.js"></script>
 <script src="js/models/player.js"></script>
 <script src="js/collections/questions.js"></script>
+<script src="js/views/BaseView.js"></script>
+<script src="js/views/AppView.js"></script>
 <script src="js/views/questionListView.js"></script>
 <script src="js/views/questionView.js"></script>
 <script src="js/views/homeView.js"></script>

@@ -1,6 +1,6 @@
 /*global Backbone*/
 
-var ResultsView = Backbone.View.extend({
+var ResultsView = BaseView.extend({
   template: _.template($('#template-results').html()),
   render: function () {
     this.$el.html(this.template());
@@ -19,6 +19,7 @@ var ResultsView = Backbone.View.extend({
   'render': function () {
   	this.$el.html(this.template());
     this.addAll();
+    BaseView.prototype.render.apply(this, arguments);
   },
   'addAll': function () {
     this.collection.forEach(this.add, this);

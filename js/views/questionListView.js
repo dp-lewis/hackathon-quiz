@@ -1,5 +1,5 @@
-/*global Backbone, QuestionView*/
-var QuestionListView = Backbone.View.extend({
+/*global BaseView, QuestionView*/
+var QuestionListView = BaseView.extend({
   'className': 'question-list',
   'initialize': function () {
     this.collection.on('add', this.add, this);
@@ -14,6 +14,7 @@ var QuestionListView = Backbone.View.extend({
   },
   'render': function () {
     this.addAll();
+    BaseView.prototype.render.apply(this, arguments);
   },
   'addAll': function () {
     this.collection.forEach(this.add, this);

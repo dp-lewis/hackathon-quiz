@@ -1,7 +1,11 @@
-/*global ResultsView, Backbone, HomeView, QuestionListView, Questions, Player, TopicsView, DifficultyView*/
+/*global AppView, ResultsView, Backbone, HomeView, QuestionListView, Questions, Player, TopicsView, DifficultyView*/
 var myPlayer = new Player();
 
 var activeQuestions = new Questions();
+
+var myAppView = new AppView();
+myAppView.render();
+$('#app').html(myAppView.el);
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -13,50 +17,50 @@ var Router = Backbone.Router.extend({
   },
 
   home: function () {
-    var myHome = new HomeView();
-    myHome.render();
-    $('#app').html(myHome.el);
+    var view = new HomeView();
+    view.render({ page: true });
+    myAppView.goto(view);
   },
 
   topic: function () {
-    var myTopics = new TopicsView({
+    var view = new TopicsView({
       model: myPlayer
     });
-    myTopics.render();
-    $('#app').html(myTopics.el);
+    view.render({page: true});
+    myAppView.goto(view);
   },
 
   difficulty: function (id) {
     myPlayer.set('topic', id);
-    var myDifficultyView = new DifficultyView({
+    var view = new DifficultyView({
       model: myPlayer
     });
-    myDifficultyView.render();
-    $('#app').html(myDifficultyView.el);
+    view.render({page: true});
+    myAppView.goto(view);
   },
 
   startQuiz: function (topic, difficulty) {
-    var myQuestions = new Questions(), myQuestionListView;
+    var myQuestions = new Questions(), view;
 
     myQuestions.fetch({
       'success': function () {
 
         activeQuestions = myQuestions.topic(topic, difficulty);
-        myQuestionListView = new QuestionListView({
+        view = new QuestionListView({
           'collection': activeQuestions
         });
-        myQuestionListView.render();
-        $('#app').html(myQuestionListView.el);
+        view.render({page: true});
+        myAppView.goto(view);
       }
     });
   },
 
   results: function () {
-    var myResults = new ResultsView({
+    var view = new ResultsView({
       'collection': activeQuestions
     });
-    myResults.render();
-    $('#app').html(myResults.el);
+    view.render({page: true});
+    myAppView.goto(view);
   }
 });
 

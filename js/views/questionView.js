@@ -11,6 +11,18 @@ var QuestionView = Backbone.View.extend({
   render: function () {
     this.model.shuffleAnswers();
     this.$el.html(this.template(this.model.toJSON()));
+
+    var chars = this.$el.find('.question__question').blast({
+      delimiter: 'word',
+      customClass: 'question__text'
+    });
+
+    chars.each(function(i) {
+      var that = this;
+      var timer = setTimeout(function () {
+        $(that).addClass('is-visible');
+      }, i*100);
+    });
   },
   answer: function (ev) {
     ev.preventDefault();
