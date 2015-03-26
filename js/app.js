@@ -1,5 +1,4 @@
-/*global Backbone, HomeView, QuestionListView, Questions*/
-
+/*global Backbone, HomeView, QuestionListView, Questions, Player, TopicsView, DifficultyView*/
 var myPlayer = new Player();
 
 var Router = Backbone.Router.extend({
@@ -8,13 +7,14 @@ var Router = Backbone.Router.extend({
     "topic": "topic",
     "topic/:id": "difficulty",
     "topic/:id/:difficulty": "startQuiz"
-
   },
+
   home: function () {
     var myHome = new HomeView();
     myHome.render();
     $('#app').html(myHome.el);
   },
+
   topic: function () {
     var myTopics = new TopicsView({
       model: myPlayer
@@ -22,26 +22,28 @@ var Router = Backbone.Router.extend({
     myTopics.render();
     $('#app').html(myTopics.el);
   },
+
   difficulty: function (id) {
     myPlayer.set('topic', id);
     var myDifficultyView = new DifficultyView({
       model: myPlayer
     });
     myDifficultyView.render();
-    $('#app').html(myDifficultyView.el);    
+    $('#app').html(myDifficultyView.el);
   },
-  startQuiz: function () {
-    var myQuestions, myQuestionListView;
 
-    myQuestions = new Questions();
+  startQuiz: function (topic, difficulty) {
+    var myQuestions = new Questions(), myQuestionListView;
 
-    myQuestionListView = new QuestionListView({
-      'collection': myQuestions
+    myQuestions.fetch({
+      'success': function () {
+        myQuestionListView = new QuestionListView({
+          'collection': myQuestions.topic(topic, difficulty)
+        });
+        myQuestionListView.render();
+        $('#app').html(myQuestionListView.el);
+      }
     });
-
-    myQuestions.fetch();
-    myQuestionListView.render();
-    $('#app').html(myQuestionListView.el);    
   }
 });
 

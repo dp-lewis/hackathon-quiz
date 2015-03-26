@@ -7,6 +7,7 @@ var Question = Backbone.Model.extend({
   parse: function (data) {
     data.correctAnswer = data.answers[0]; // the first answer is always the correct one 
     data.id = Math.floor(Math.random() * 1000000);
+    data.topic = data.niche.replace(' ', '-');
     return data;
   },
   'shuffleAnswers': function() {
@@ -15,7 +16,6 @@ var Question = Backbone.Model.extend({
   },
   'isCorrect': function () {
     var correct = false;
-    console.log(this.get('correctAnswer'));
     if (this.get('givenAnswer') === this.get('correctAnswer')) {
       correct = true;
     }

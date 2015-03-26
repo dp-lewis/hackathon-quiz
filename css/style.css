@@ -4,6 +4,12 @@
 
 html {
 	font-family: sans-serif;
+	background-color: #0086ff;
+	color: #fff;
+}
+
+body {
+	padding: 10vw;
 }
 
 .question + .question {
@@ -18,16 +24,6 @@ html {
 	display: none;
 }
 
-
-
-@media (min-width: 40em) {
-	.question form {
-		display: flex;
-	}
-}
-
-
-
 .question ol {
 	list-style: none;
 	margin: 0;
@@ -36,12 +32,12 @@ html {
 
 .question legend {
    font-size: 4rem;
+   margin-bottom: 1rem;
 }
 
 
 @media (min-width: 40em) {
 	.question legend {
-	 	padding: 4rem;
 	 
 	}
 }
@@ -53,13 +49,20 @@ html {
 .question label {
    display: block;
    padding: 1em;
+   border: 1px #112d4b solid;
+   margin-bottom: 1rem;
 }
 
 .question button {
    display: block;
    padding: 1em;
+   background-color: #27ae60;
+   border: none;
+   font-size: 1rem;
+   color: #fff;
 }
 
 .question input:checked + label {
-   background: pink;
+   background: #112d4b;
+   border-color: #112d4b;
 }
