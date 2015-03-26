@@ -1,6 +1,6 @@
 /*global Backbone*/
 var QuestionView = Backbone.View.extend({
-  'className': 'question',
+  className: 'question',
   template: _.template($('#template-question').html()),
   initialize: function () {
     this.model.on('change:givenAnswer', this.renderSelection, this);
@@ -23,10 +23,14 @@ var QuestionView = Backbone.View.extend({
   },
   checkAnswer: function () {
     this.$el.addClass('done');
-    if (this.model.isCorrect()) {
-      alert('yup');
-    } else {
-      alert('nope');
+
+    if (this.$el.attr('data-last-question') === 'true') {
+      router.navigate('results', true);
     }
+    // if (this.model.isCorrect()) {
+    //   alert('yup');
+    // } else {
+    //   alert('nope');
+    // }
   }
 });

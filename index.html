@@ -46,6 +46,17 @@
 	<a href="#/topic/<%= topic %>/hard">hard</a>
 </script>
 
+<script type="text/html" id="template-results">
+	<h1>Results</h1>
+	<a href="#/topic">Play again</a>
+</script>
+
+<script type="text/html" id="template-result">
+	<h3><%= question %></h3>
+	<p>You said "<%= givenAnswer %>" and that was <% if (correct) {%>correct<%} else { %>incorrect the correct answer was "<%= correctAnswer %>"<%}%></p>
+
+</script>
+
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="bower_components/backbone/backbone.js"></script>
@@ -57,6 +68,8 @@
 <script src="js/views/homeView.js"></script>
 <script src="js/views/topicsView.js"></script>
 <script src="js/views/difficultyView.js"></script>
+<script src="js/views/resultsView.js"></script>
+<script src="js/views/resultView.js"></script>
 <script src="js/app.js"></script>
 
 </body>
