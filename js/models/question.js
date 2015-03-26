@@ -6,6 +6,7 @@ var Question = Backbone.Model.extend({
   },
   parse: function (data) {
     data.correctAnswer = data.answers[0]; // the first answer is always the correct one 
+    data.id = Math.floor(Math.random() * 1000000);
     return data;
   },
   'shuffleAnswers': function() {

@@ -1,0 +1,65 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: sans-serif;
+}
+
+.question + .question {
+	display: none;
+}
+
+.question.done + .question:not(.done) {
+	display: block;
+}
+
+.question.done {
+	display: none;
+}
+
+
+
+@media (min-width: 40em) {
+	.question form {
+		display: flex;
+	}
+}
+
+
+
+.question ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.question legend {
+   font-size: 4rem;
+}
+
+
+@media (min-width: 40em) {
+	.question legend {
+	 	padding: 4rem;
+	 
+	}
+}
+
+.question input {
+	display: none;
+}
+
+.question label {
+   display: block;
+   padding: 1em;
+}
+
+.question button {
+   display: block;
+   padding: 1em;
+}
+
+.question input:checked + label {
+   background: pink;
+}

@@ -1,18 +1,20 @@
 /*global Backbone*/
 var QuestionView = Backbone.View.extend({
+  'className': 'question',
   template: _.template($('#template-question').html()),
   initialize: function () {
     this.model.on('change:givenAnswer', this.renderSelection, this);
   },
   events: {
-    'click button': 'answer'
+    'submit form': 'answer'
   },
   render: function () {
     this.model.shuffleAnswers();
     this.$el.html(this.template(this.model.toJSON()));
   },
   answer: function (ev) {
-    this.model.set('givenAnswer', $(ev.target).data('answer'));
+    ev.preventDefault();
+    this.model.set('givenAnswer', this.$el.find('input:checked').val());
     this.checkAnswer();
   },
   renderSelection: function () {
@@ -20,6 +22,7 @@ var QuestionView = Backbone.View.extend({
     this.$el.find('button[data-answer="' + this.model.get('givenAnswer') + '"]').addClass('is-selected');
   },
   checkAnswer: function () {
+    this.$el.addClass('done');
     if (this.model.isCorrect()) {
       alert('yup');
     } else {

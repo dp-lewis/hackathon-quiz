@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>finder.com.au Quiz</title>
+<link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
 
@@ -11,20 +12,51 @@
 </div>
 
 <script type="text/html" id="template-question">
-	<h1><%= question %></h1>
-	<ol>
-	<% answers.forEach(function (answer) { %>
-	   <li><button type="button" data-answer="<%= answer %>"><%= answer %></button></li>
-	<% }); %>
-	</ol>
+	<form>
+		<legend><%= question %></legend>
+
+		<div class="answers">
+			<ol>
+			<% for (var i = 0; i < answers.length; i = i + 1) { %>
+			   <li><input id="q-<%= id %>-<%= i %>" type="radio" name="answer" value="<%= answers[i] %>"> <label for="q-<%= id %>-<%= i %>"><%= answers[i] %></label></li>
+			<% } %>
+			</ol>
+
+			<button type="submit">Lock it in</button>
+		</div>
+	</form>
+</script>
+
+<script type="text/html" id="template-home">
+	<h1>Finder Quiz</h1>
+	<a href="#/topic">Start</a>
+</script>
+
+<script type="text/html" id="template-topics">
+	<h1>Select a topic</h1>
+	<a href="#/topic/credit-cards">Credit Cards</a>
+	<a href="#/topic/insurance">Insurance</a>
+	<a href="#/topic/personal-loans">Personal Loans</a>	
+	<a href="#/topic/home-loans">Home Loans</a>	
+</script>
+
+<script type="text/html" id="template-difficulty">
+	<h1>Difficulty</h1>
+	<a href="#/topic/<%= topic %>/easy">easy</a>
+	<a href="#/topic/<%= topic %>/hard">hard</a>
 </script>
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="bower_components/backbone/backbone.js"></script>
-<script src="js/collections/questions.js"></script>
 <script src="js/models/question.js"></script>
+<script src="js/models/player.js"></script>
+<script src="js/collections/questions.js"></script>
+<script src="js/views/questionListView.js"></script>
 <script src="js/views/questionView.js"></script>
+<script src="js/views/homeView.js"></script>
+<script src="js/views/topicsView.js"></script>
+<script src="js/views/difficultyView.js"></script>
 <script src="js/app.js"></script>
 
 </body>
